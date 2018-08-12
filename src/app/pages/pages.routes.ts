@@ -1,4 +1,4 @@
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, CanActivate } from '@angular/router';
 
 import { DashBoardComponent } from './dash-board/dash-board.component';
 import { ProgressComponent } from './progress/progress.component';
@@ -7,10 +7,12 @@ import { PagesComponent } from './pages.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
+import { LoginGuardGuard } from '../services/service.index';
 
 const pagesRoutes: Routes = [
   { path: '',
   component: PagesComponent,
+  canActivate: [ LoginGuardGuard],
   children: [
     { path: 'dashboard', component: DashBoardComponent, data: {titulo: 'Dashboard'} },
     { path: 'progress', component: ProgressComponent, data: {titulo: 'Barras de Progreso'} },
