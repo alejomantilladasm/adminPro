@@ -1,3 +1,4 @@
+export { CargarArchivoService } from './cargar-archivo/cargar-archivo.service';
 export { SettingsService } from './settings/settings.service';
 export { SharedService } from './shared/shared.service';
 export { SideBarService } from './shared/side-bar.service';
