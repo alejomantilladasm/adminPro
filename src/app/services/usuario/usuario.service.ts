@@ -11,6 +11,7 @@ export class UsuarioService {
   usuario: Usuario;
 
   constructor(private _http: HttpClient, private _router: Router, private _cargarArchivoService: CargarArchivoService) {
+    this.usuario = JSON.parse(localStorage.getItem('usuario')) || null;
   }
 
   login(usuario: Usuario, recuerdame: boolean = false) {
@@ -83,8 +84,10 @@ export class UsuarioService {
     let url = `${URL_SERVICIOS}/usuario/${usuario._id}?token=${token}`;
     return this._http.put( url, usuario).map((resp: any) => {
       alert(`Usuario ${resp.usuario.email} actualizado correctamente...!`);
-      localStorage.setItem('usuario', JSON.stringify(resp.usuario));
-      this.usuario = resp.usuario;
+      if (usuario._id === resp.usuario._id) {
+        localStorage.setItem('usuario', JSON.stringify(resp.usuario));
+        this.usuario = resp.usuario;
+      }
       return true;
     });
   }
@@ -96,6 +99,22 @@ export class UsuarioService {
     }).catch(error => {
       console.log(error);
     });
+  }
+
+  cargarUsuarios ( desde: number = 0) {
+    let url = URL_SERVICIOS + `/usuario?desde=${desde}`;
+    return this._http.get(url);
+  }
+
+  buscarUsuarios ( termino: string) {
+    let url = URL_SERVICIOS + `/busqueda/coleccion/usuarios/${termino}`;
+    return this._http.get(url);
+  }
+
+  eliminarUsuario(usuario: Usuario) {
+    let token = localStorage.getItem('token') || '';
+    let url = URL_SERVICIOS + `/usuario/${usuario._id}?token=${token}`;
+    return this._http.delete(url);
   }
 
 }

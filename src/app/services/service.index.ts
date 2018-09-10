@@ -6,3 +6,5 @@ export { SideBarService } from './shared/side-bar.service';
 export { UsuarioService } from './usuario/usuario.service';
 // Guard
 export { LoginGuardGuard } from './guards/login-guard.guard';
+//modal
+export { ModalUploadService } from '../components/modal-upload/modal-upload.service';

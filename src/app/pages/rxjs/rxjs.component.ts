@@ -69,7 +69,7 @@ subscription: Subscription;
     //   }
     // );
 
-    // Subcribe a metodo con map y filter
+/*     // Subcribe a metodo con map y filter
     this.subscription = this.retornaObservableMap().subscribe(
       // observer.next(contador);
       numero => {
@@ -83,7 +83,7 @@ subscription: Subscription;
       () => {
         console.log('Termino...!');
       }
-    );
+    ); */
 
   }
 

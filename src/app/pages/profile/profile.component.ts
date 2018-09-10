@@ -10,7 +10,7 @@ import { Usuario } from '../../models/usuario.model';
 export class ProfileComponent implements OnInit {
 
   archivo: File;
-  archivoTemp: string;
+  archivoTemp: any;
 
   usuario: Usuario;
 

@@ -9,6 +9,7 @@ import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { LoginGuardGuard } from '../services/service.index';
 import { ProfileComponent } from './profile/profile.component';
+import { UsuariosComponent } from '../pages/usuarios/usuarios.component';
 
 const pagesRoutes: Routes = [
   { path: '',
@@ -22,6 +23,8 @@ const pagesRoutes: Routes = [
     { path: 'account-settings', component: AccountSettingsComponent, data: {titulo: 'Seleccion de Tema'} },
     { path: 'profile', component: ProfileComponent, data: {titulo: 'Perfil de Usuario'} },
     { path: 'rxjs', component: RxjsComponent, data: {titulo: 'Ejemplo de Observable'} },
+    // Mantenimiento
+    { path: 'usuarios', component: UsuariosComponent, data: {titulo: 'Mantenimiento de Usuarios'} },
     { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
   ]
 }
