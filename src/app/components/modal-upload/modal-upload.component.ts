@@ -14,7 +14,7 @@ archivoTemp: any;
 
   constructor( public _cargarArchivoService: CargarArchivoService,
                public _modalUploadService: ModalUploadService) {
-    console.log('Modal listo ...!');
+    // console.log('Modal listo ...!');
   }
 
   ngOnInit() {
@@ -41,13 +41,13 @@ archivoTemp: any;
   }
 
   subirArchivo() {
-    console.log(this.archivo);
-    console.log(this._modalUploadService.tipo);
-    console.log( this._modalUploadService.id);
+    // console.log(this.archivo);
+    // console.log(this._modalUploadService.tipo);
+    // console.log( this._modalUploadService.id);
     this._cargarArchivoService.cargarArchivo(this.archivo, this._modalUploadService.tipo, this._modalUploadService.id)
     .then(resp => {
 
-      console.log(resp);
+      // console.log(resp);
       this._modalUploadService.notificacion.emit(resp);
       this.cerrarModal();
 

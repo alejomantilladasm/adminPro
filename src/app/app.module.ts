@@ -14,6 +14,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './login/register.component';
 
+import { NgbModule, NgbActiveModal  } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { RegisterComponent } from './login/register.component';
     RegisterComponent
   ],
   imports: [
+    NgbModule.forRoot(),
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
@@ -30,7 +32,9 @@ import { RegisterComponent } from './login/register.component';
     PagesModule,
     ServiceModule
   ],
-  providers: [],
+  providers: [
+    NgbActiveModal
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,113 @@
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <input [(ngModel)]="termino" type="text" class="form-control" placeholder="Buscar" (keyup)='buscarHospitales();'>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" *ngIf="loading">
+    <div class="col-sm-12">
+        <div class="alert alert-warning text-center">
+            <strong>Cargando</strong>
+            <br/>
+            <i class="fa fa-refresh fa-spin fa-2x"></i>
+            <br/>
+            <span>Espere por favor ... !</span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">Hospitales Registrados ( <small>{{totalHospitales}}</small> )</h3>
+                <button class="btn btn-success" (click)="open(content)"><i class="fa fa-plus"></i> Crear Hospital</button>
+                <table class="table table-hover ">
+                    <thead>
+                        <tr>
+                            <th>Imagen</th>
+                            <th>Hospital</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let hospital of hospitales">
+                            <td style="width: 70px;">
+                                <img [src]="hospital.img | imagen:'hospitales'" class="img-circle pointer" style="width: 50px;" (click)="actualizarImagen(hospital)"><img>
+                            </td>
+                            <td>
+                                <input id="nombre" name="nombre" [(ngModel)]="hospital.nombre" required/>
+                            </td>
+                            <td>
+                                <button (click)="actualizarHospital(hospital)" class="btn btn-warning"><i class="fa fa-save"></i></button>
+                                <button (click)="eliminarHospital(hospital)" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div>
+                    <button (click)="cambiarDesde(-5)" class="btn btn-primary">Anterior</button>
+                    <button (click)="cambiarDesde(5)" class="btn btn-primary">Siguiente</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h5 class="modal-title">Nuevo Hospital</h5>
+        <button type="button" class="close" aria-label="Close" (click)="c('cerrar');">
+                <span aria-hidden="true">&times;</span>
+              </button>
+    </div>
+    <div class="modal-body">
+
+        <div class="form-group">
+            <label for="exampleInputEmail1">Nombre del Hospital</label>
+            <input [(ngModel)]="hospitalNew.nombre" class="form-control" placeholder="Nombre del Hospital">
+            <small id="emailHelp" class="form-text text-muted">Defina un nombre para el hospital.</small>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="c('cerrar');">Cerrar</button>
+        <button type="button" class="btn btn-primary" (click)="c('crear');">Crear</button>
+    </div>
+</ng-template>
+
+<ng-template #content2 let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h5 class="modal-title">Actualización hospital</h5>
+        <button type="button" class="close" aria-label="Close" (click)="c('cerrar');">
+                <span aria-hidden="true">&times;</span>
+              </button>
+    </div>
+    <div class="modal-body">
+        <div class="alert alert-success" role="alert">
+            Registro actualizado correctamente...!
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="c('cerrar');">Cerrar</button>
+    </div>
+</ng-template>
+
+<ng-template #content3 let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h5 class="modal-title">Eliminición hospital</h5>
+        <button type="button" class="close" aria-label="Close" (click)="c('cerrar');">
+                <span aria-hidden="true">&times;</span>
+              </button>
+    </div>
+    <div class="modal-body">
+        <div class="alert alert-danger" role="alert">
+            Registro eliminado correctamente...!
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="c('cerrar');">Cerrar</button>
+    </div>
+</ng-template>

@@ -10,7 +10,9 @@ import { RxjsComponent } from './rxjs/rxjs.component';
 import { LoginGuardGuard } from '../services/service.index';
 import { ProfileComponent } from './profile/profile.component';
 import { UsuariosComponent } from '../pages/usuarios/usuarios.component';
-
+import { HospitalesComponent } from '../pages/hospitales/hospitales.component';
+import { MedicosComponent } from '../pages/medicos/medicos.component';
+import { MedicoComponent } from '../pages/medicos/medico.component';
 const pagesRoutes: Routes = [
   { path: '',
   component: PagesComponent,
@@ -25,6 +27,9 @@ const pagesRoutes: Routes = [
     { path: 'rxjs', component: RxjsComponent, data: {titulo: 'Ejemplo de Observable'} },
     // Mantenimiento
     { path: 'usuarios', component: UsuariosComponent, data: {titulo: 'Mantenimiento de Usuarios'} },
+    { path: 'hospitales', component: HospitalesComponent, data: {titulo: 'Mantenimiento de Hospitales'} },
+    { path: 'medicos', component: MedicosComponent, data: {titulo: 'Mantenimiento de Médicos'} },
+    { path: 'medico/:id', component: MedicoComponent, data: {titulo: 'Actualizar Médicos'} },
     { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
   ]
 }

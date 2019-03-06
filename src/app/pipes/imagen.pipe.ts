@@ -17,7 +17,6 @@ export class ImagenPipe implements PipeTransform {
     if (img.indexOf('https') >= 0) {
       return img;
     }
-    tipo = 'usuarios';
       switch (tipo) {
         case 'usuarios':
          url += `/usuarios/${img}`;
@@ -33,7 +32,7 @@ export class ImagenPipe implements PipeTransform {
         url += `/usuario/noImage`;
         break;
       }
-// console.log(url);
+    // console.log(url);
     return url;
   }
 
