@@ -117,4 +117,12 @@ export class UsuarioService {
     return this._http.delete(url);
   }
 
+  obtenerUsuarioPorId( id: string ) {
+    let token = localStorage.getItem('token') || '';
+    let url = `${URL_SERVICIOS}/usuario/${id}?token=${token}`;
+    return this._http.get(url).map((resp: any) => {
+      return resp.usuario;
+    });
+  }
+
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Medico } from '../../models/medico.model';
-import { MedicoService } from '../../services/service.index';
+import { MedicoService, ModalUploadService } from '../../services/service.index';
 import { NgForm } from '@angular/forms';
 import { Hospital } from '../../models/hospital.model';
 import { HospitalService } from '../../services/hospital/hospital.service';
@@ -19,9 +19,10 @@ export class MedicoComponent implements OnInit {
   hospital: Hospital = new Hospital('');
   usuarios: Usuario[] = [];
   medico: Medico = new Medico('', '', '', '', '');
+  usuario: Usuario = new Usuario('', '', '', '', '', false, '');
 
-  constructor(public _medicoService: MedicoService, private _hospitalService: HospitalService, private _usuarioService: UsuarioService, 
-    public _reouter: Router, public _activatedRoute: ActivatedRoute) {
+  constructor(public _medicoService: MedicoService, private _hospitalService: HospitalService, private _usuarioService: UsuarioService,
+    public _reouter: Router, public _activatedRoute: ActivatedRoute, public _modalUploadService: ModalUploadService) {
 
     _activatedRoute.params.subscribe(parametros => {
       let id = parametros['id'];
@@ -35,12 +36,17 @@ export class MedicoComponent implements OnInit {
     this._medicoService.leerMedicoPorId(id).subscribe(medico => {
       this.medico = medico;
       this.cambioHospital(medico.hospital);
+      this._usuarioService.obtenerUsuarioPorId(this.medico.usuario).subscribe(resp => this.usuario = resp);
     });
   }
 
   ngOnInit() {
     this.cargarHospitales();
     this.cargarUsuarios();
+    this._modalUploadService.notificacion.subscribe(resp => {
+      console.log(resp);
+      this.usuario.img = resp.usuario;
+    });
   }
 
   guardarMedico(forma: NgForm) {
@@ -51,7 +57,11 @@ export class MedicoComponent implements OnInit {
       return;
     }
 
-    this.crearMedico();
+    if (this.medico._id === '') {
+      this.crearMedico();
+    } else {
+      this.actualizarMedico(this.medico);
+    }
 
 
   }
@@ -93,6 +103,12 @@ export class MedicoComponent implements OnInit {
     } else {
       this.hospital = new Hospital('');
     }
+  }
+
+  cambiarForo() {
+
+    this._modalUploadService.mostrarModal('usuarios', '' + this.usuario._id);
+
   }
 
 }
